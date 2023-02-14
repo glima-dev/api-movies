@@ -1,0 +1,27 @@
+{
+  "name": "m4-sp2-movies-glima-dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsnd --cls --rs --ignore-watch node_modules src/app.ts"
+  },
+  "repository": "git@github.com:Kenzie-Academy-Brasil-Developers/m4-sp2-movies-glima-dev.git",
+  "author": "glima-dev <guilherme.lima.tec@live.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.9.0",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/pg": "^8.6.6",
+    "@types/pg-format": "^1.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  }
+}
