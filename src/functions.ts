@@ -3,13 +3,7 @@ import { Request, Response } from "express";
 import { QueryConfig } from "pg";
 import format from "pg-format";
 import { client } from "./database";
-import {
-  IMovie,
-  IPagination,
-  MovieCreate,
-  MovieResult,
-  TypesInputCategories,
-} from "./interfaces";
+import { IMovie, IPagination, MovieResult } from "./interfaces";
 
 const createMovie = async (
   request: Request,
