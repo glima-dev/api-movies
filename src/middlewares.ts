@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Request, Response, NextFunction, json } from "express";
 import { QueryConfig } from "pg";
 import { client } from "./database";
@@ -45,7 +44,7 @@ const checkCategoryMiddleware = async (
     (request.method === "PATCH" && request.body.categories) ||
     request.method === "POST"
   ) {
-    const { categories } = request.body; // VAMOS SEPARAR O CATEGORIES DAS DEMAIS CHAVES DO BODY
+    const { categories } = request.body;
     const typeInputs: TypesInputCategories[] = [
       "Drama",
       "Suspense",
@@ -57,7 +56,6 @@ const checkCategoryMiddleware = async (
 
     const errors: string[] = [];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     categories.forEach((key: any): boolean => {
       if (!typeInputs.includes(key)) {
         errors.push(key);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Request, Response } from "express";
 import { QueryConfig } from "pg";
 import format from "pg-format";
@@ -16,11 +15,8 @@ const createMovie = async (
   response: Response
 ): Promise<Response> => {
   try {
-    const { categories, ...moviePayload } = request.body; // VAMOS SEPARAR O CATEGORIES DAS DEMAIS CHAVES DO BODY
+    const { categories, ...moviePayload } = request.body;
 
-    // PODEMOS PASSAR CATEGORIES COMO UM SEGUNDO ARGUMENTO, JUNTO DOS IDENTIFIERS
-    // NO QUE SE REFERE A ARRAYS NO POSTGRES, PARA QUE ELE RECONHEÇA, PODERÍAMOS
-    // PASSAR O VALOR DIRETO DA SEGUINTE FORMA: (%I, '{Drama, Suspense}')
     const queryTemplate: string = format(
       `
               INSERT INTO
@@ -33,13 +29,6 @@ const createMovie = async (
       Object.values(moviePayload),
       Object.values(categories)
     );
-
-    /* 
-      O %L IRÁ CONCATENAR OS VALORES UTILIZANDO '', PORÉM O %s VAI INSERIR O VALOR EM SI SEM '', APENAS O PRÓPRIO VALOR
-      INSERIR COLUNAS: %I ("")
-      INSERIR APENAS O TEXTO EM SI %s (SEM ASPAS)
-      INSERIR LITERAIS %L ('')
-    */
 
     const queryResult: MovieResult = await client.query(queryTemplate);
     const newMovie: IMovie = queryResult.rows[0];
@@ -129,7 +118,6 @@ const listMovies = async (
   return response.status(200).json(pagination);
 };
 
-// VAMOS FILTRAR OS FILMES POR CATEGORIA E EXIBIR O VALOR TOTAL DA SOMA DE PRICE DE TODOS
 const listMoviesCategory = async (
   request: Request,
   response: Response
@@ -143,9 +131,6 @@ const listMoviesCategory = async (
           movies
       WHERE $1 ILIKE ANY(categories);
       `;
-  // ESTAMOS FAZENDO A BUSCA DE UM VALOR LITERAL QUE SEJA IGUAL A QUALQUER COISA (ANY) DENTRO DE CATEGORIES
-  // NESSE CASO FUNCIONARIA ILIKE, LIKE =... QUALQUER COISA POIS SERIA COMO SE FOSSE UM FIND DENTRO DE CATEGORIES
-  // SE NÃO ACHAR ELE RETORNARÁ VAZIO
 
   const queryConfig: QueryConfig = {
     text: queryTemplate,

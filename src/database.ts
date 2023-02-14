@@ -1,10 +1,10 @@
 import { Client } from "pg";
 
 const client: Client = new Client({
-  user: "guilherme",
-  password: "killers",
+  user: "YOUR_USER",
+  password: "YOUR_PASSWORD",
   host: "localhost",
-  database: "m4_sp2_movies_extra",
+  database: "movies_list",
   port: 5432,
 });
 

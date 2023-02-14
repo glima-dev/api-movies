@@ -26,7 +26,6 @@ interface IPagination {
   data: IMovie[];
 }
 
-// CATEGORIES PODE POSSUIR APENAS OS DADOS CONTIDOS NA TIPAGEM
 type TypesInputCategories =
   | "Drama"
   | "Suspense"

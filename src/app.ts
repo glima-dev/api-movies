@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import express, { Application, json } from "express";
 import { startDatabase } from "./database";
 import {
