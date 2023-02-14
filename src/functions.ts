@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Request, Response } from "express";
 import { QueryConfig } from "pg";
 import format from "pg-format";
@@ -48,15 +49,16 @@ const listMovies = async (
   let page = Number(request.query.page) || 1;
   let perPage = Number(request.query.perPage) || 5;
 
-  let order = request.query.order;
-  let sort = request.query.sort;
+  let order =
+    request.query.order === "asc" || request.query.order === "desc"
+      ? request.query.order
+      : "asc";
+  const sort =
+    request.query.sort === "price" || request.query.sort === "duration"
+      ? request.query.sort
+      : "id";
 
-  if (
-    (order !== "price" && order !== "duration") ||
-    (sort !== "asc" && sort !== "desc")
-  )
-    order = "id";
-  if (sort !== "asc" && sort !== "desc") sort = "asc";
+  if (order === "desc" && sort === "id") order = "asc";
 
   if (isNaN(page) || page <= 0) page = 1;
   if (isNaN(perPage) || perPage <= 0 || perPage > 5) perPage = 5;
@@ -86,8 +88,8 @@ const listMovies = async (
     ORDER BY %I %s
     OFFSET %L LIMIT %L;
 `,
-    order,
     sort,
+    order,
     perPage * (page - 1),
     perPage
   );
